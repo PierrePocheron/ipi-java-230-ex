@@ -3,21 +3,33 @@ package com.ipiecoles.java.java230.model;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
+import javax.persistence.*;
+
 import java.util.Objects;
 
+@Entity
+@Table(name = "employe")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Employe {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@Column(name = "nom")
 	private String nom;
-	
+
+	@Column(name = "prenom")
 	private String prenom;
 
+	@Column(name = "matricule")
 	private String matricule;
 
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+	@Column(name = "dateEmbauche")
 	private LocalDate dateEmbauche;
-	
+
+	@Column(name = "salaire")
 	private Double salaire = Entreprise.SALAIRE_BASE;
 	
 	public Employe() {

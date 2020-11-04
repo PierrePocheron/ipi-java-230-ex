@@ -2,20 +2,23 @@ package com.ipiecoles.java.java230.model;
 
 import com.ipiecoles.java.java230.exceptions.TechnicienException;
 import org.joda.time.LocalDate;
+import org.springframework.data.annotation.Transient;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
+@Entity
+@Table(name = "manager")
 public class Manager extends Employe {
 
+	@OneToMany( mappedBy = "manager", fetch = FetchType.EAGER)
 	private Set<Technicien> equipe = new HashSet();
 
-	public Manager(){
-
-	}
-
+	public Manager(){ }
 	public Manager(String nom, String prenom, String matricule, LocalDate dateEmbauche, Double salaire, HashSet<Technicien> equipe) {
 		super(nom, prenom, matricule, dateEmbauche, salaire);
 		this.equipe = equipe;
